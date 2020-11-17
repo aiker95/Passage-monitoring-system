@@ -1,5 +1,4 @@
-﻿#include "includes.h"
-#include "SClient.h"
+﻿#include "../../tcp/hdr/includes.h"
 
 //Конструктор принимает:
 //port - порт на котором будем запускать сервер

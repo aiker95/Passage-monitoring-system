@@ -2,14 +2,14 @@
 #define SSERVER_H
 #include "includes.h"
 
-//Буффер для приёма данных от клиента
+//Р‘СѓС„С„РµСЂ РґР»СЏ РїСЂРёС‘РјР° РґР°РЅРЅС‹С… РѕС‚ РєР»РёРµРЅС‚Р°
 static constexpr uint16_t buffer_size = 4096;
 
 struct TcpServer {
     class Client;
-    //Тип Callback-функции обработчика клиента
+     //РўРёРї Callback-С„СѓРЅРєС†РёРё РѕР±СЂР°Р±РѕС‚С‡РёРєР° РєР»РёРµРЅС‚Р°
     typedef std::function<void(Client)> handler_function_t;
-    //Статус сервера
+     //РЎС‚Р°С‚СѓСЃ СЃРµСЂРІРµСЂР°
     enum class status : uint8_t {
         up = 0,
         err_socket_init = 1,
@@ -19,7 +19,7 @@ struct TcpServer {
     };
 
 private:
-    uint16_t port; //Порт
+    uint16_t port; //РџРѕСЂС‚
     status _status = status::close;
     handler_function_t handler;
 
@@ -42,7 +42,7 @@ public:
     uint16_t getPort() const;
     uint16_t setPort(const uint16_t port);
 
-    status getStatus() const { return _status; }
+    status getStatus() const {return _status;}
 
     status restart();
     status start();
@@ -50,6 +50,7 @@ public:
 
     void joinLoop();
 };
+
 
 class TcpServer::Client {
     SOCKET socket;
@@ -63,9 +64,9 @@ public:
     ~Client();
     uint32_t getHost() const;
     uint16_t getPort() const;
-
-    void connectTo(Client& other_client) const;
-    void waitConnect() const;
+    
+	void connectTo(Client& other_client) const;
+	void waitConnect() const;
 
     int loadData();
     char* getData();
