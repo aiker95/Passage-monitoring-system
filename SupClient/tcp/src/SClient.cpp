@@ -33,9 +33,11 @@ TcpClient::status TcpClient::disconnect() noexcept {
 }
 
 int TcpClient::loadData() { return recv(client_socket, buffer, buffer_size, 0); }
-char* TcpClient::getData() { return buffer; }
+char* TcpClient::getData() { buffer[buffer_size] = '\0';  return buffer; }
 
 bool TcpClient::sendData(const char* buffer, const size_t size) const {
+	std::cout << buffer << std::endl;
+
 	if (send(client_socket, buffer, size, 0) < 0) return false;
 	return true;
 }

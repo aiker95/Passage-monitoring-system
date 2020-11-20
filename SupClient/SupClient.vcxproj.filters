@@ -21,6 +21,9 @@
     <ClCompile Include="tcp\src\SClient.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="..\Other\Framework\Log.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tcp\hdr\includes.h">

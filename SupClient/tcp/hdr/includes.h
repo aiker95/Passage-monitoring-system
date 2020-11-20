@@ -16,7 +16,16 @@
 #include <thread>
 #include <list>
 #include <string>
-#include "SServer.h"
+#include <sstream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <cstdint>
 #include "SClient.h"
+
+#include "pointer.h"
+#include "writer.h"
+#include "Log.h"
+
+#include <time.h>
 
 #endif INCLUDES_H

@@ -1,5 +1,4 @@
 ﻿#include "includes.h"
-#include "SClient.h"
 
 //Конструктор принимает:
 //port - порт на котором будем запускать сервер
@@ -39,9 +38,12 @@ void TcpServer::joinLoop() { handler_thread.join(); }
 //Загружает в буфер данные от клиента и возвращает их размер
 int TcpServer::Client::loadData() { return recv(socket, buffer, buffer_size, 0); }
 //Возвращает указатель на буфер с данными от клиента
-char* TcpServer::Client::getData() { return buffer; }
+char* TcpServer::Client::getData() { buffer[buffer_size] = '\0';  return buffer; }
 //Отправляет данные клиенту
 bool TcpServer::Client::sendData(const char* buffer, const size_t size) const {
+
+    std::cout << buffer << std::endl;
+
     if (send(socket, buffer, size, 0) < 0) return false;
     return true;
 }
@@ -126,21 +128,16 @@ TcpServer::Client::~Client() {
 uint32_t TcpServer::Client::getHost() const { return address.sin_addr.S_un.S_addr; }
 uint16_t TcpServer::Client::getPort() const { return address.sin_port; }
 
-
-void TcpServer::Client::connectTo(TcpServer::Client& other_client) const {
-    other_client.connected_to = const_cast<Client*>(this);
-    while (true) {
-        int size = other_client.loadData();
-        if (size == 0) return;
-        sendData(other_client.getData(), size);
-    }
+void IdleState::Passed() {
+    this->Road_->TransitionTo(new IdleState);
 }
 
-void TcpServer::Client::waitConnect() const {
-    while (connected_to == nullptr);
-    while (true) {
-        int size = connected_to->loadData();
-        if (size == 0) return;
-        sendData(connected_to->getData(), size);
-    }
-}
+/**
+ * Клиентский код.
+ */
+//void ClientCode() {
+//    Road* road = new Road(new IdleState);
+//    road->Request1();
+//    road->Request2();
+//    delete road;
+//}

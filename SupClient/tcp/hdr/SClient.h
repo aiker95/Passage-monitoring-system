@@ -8,6 +8,19 @@ typedef SOCKET socket_t;
 
 #define buffer_size 4096
 
+
+struct CommandData
+{
+	int Test1;
+	int Test2;
+	const char* start_time;
+};
+
+struct CommandInp
+{
+	int Status;
+};
+
 struct TcpClient {
 
 	enum class status : uint8_t {
@@ -24,6 +37,8 @@ private:
 	socket_t client_socket;
 	WSAData w_data;
 public:
+
+	CommandInp inimi;
 	TcpClient() noexcept;
 	~TcpClient();
 
